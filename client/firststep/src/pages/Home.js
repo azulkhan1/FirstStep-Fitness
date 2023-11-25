@@ -6,12 +6,14 @@ import "../styles/Home.css"
 function Home () {
 
     return (
-        <div className="home"  style ={{ backgroundImage: `url(${bg})`}}>
-          
+       <div className="home"  style ={{ backgroundImage: `url(${bg})`}}>
+         
           <div className="top">
+
             <h1> FirstStep Fitness</h1>
             <p> Make the first step to a healthier life </p>
           </div>
+        
           
         </div>
       ); 
