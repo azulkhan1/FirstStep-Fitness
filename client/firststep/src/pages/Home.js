@@ -9,7 +9,7 @@ function Home () {
         <div className="home"  style ={{ backgroundImage: `url(${bg})`}}>
           
           <div className="top">
-            <h1> FirstStep</h1>
+            <h1> FirstStep Fitness</h1>
             <p> Make the first step to a healthier life </p>
           </div>
           
