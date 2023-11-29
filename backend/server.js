@@ -60,6 +60,10 @@ app.get("/getUsers", (req, res) => {
 
 // });
 
+app.get("/", (req, res) => {
+  getExercisesForBodyPart("back");
+});
+
 app.listen(port, () => console.log(`Express app running on port ${port}!`));
 
 // to do: seutp database

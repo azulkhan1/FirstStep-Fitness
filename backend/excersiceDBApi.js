@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 async function getExercisesForBodyPart(bodypart) {
   const url =
     "https://exercisedb.p.rapidapi.com/exercises/bodyPart/" +
@@ -6,7 +8,7 @@ async function getExercisesForBodyPart(bodypart) {
   const options = {
     method: "GET",
     headers: {
-      "X-RapidAPI-Key": "89cc912337msh09985de479aa03bp1c55adjsn0eb65144131c",
+      "X-RapidAPI-Key": process.env.RAPID_KEY,
       "X-RapidAPI-Host": "exercisedb.p.rapidapi.com",
     },
   };
