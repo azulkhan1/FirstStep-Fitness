@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import './App.css';
-
 
 function BmiForm() {
   // State variables for each form field and the results
