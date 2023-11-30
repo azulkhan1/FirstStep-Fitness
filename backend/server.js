@@ -7,6 +7,8 @@ const { getPushWorkout } = require("./ppl/push");
 const { getPullWorkout } = require("./ppl/pull");
 const { getLegWorkout } = require("./ppl/legs");
 const { getFullBodyWorkout } = require("./fullbody/fullBodyWorkout");
+const { getUpperWorkout } = require("./UppLower/upper");
+const { getLowerWorkout } = require("./UppLower/lower");
 
 // app.use(express.json()); // Make sure it comes back as json
 // app.use(express.urlencoded()); // Make sure it comes back as json
@@ -81,6 +83,16 @@ app.get("/workout/ppl/legs", async (req, res) => {
 app.get("/workout/fullbody", async (req, res) => {
   const fWorkout = await getFullBodyWorkout();
   res.json(fWorkout);
+});
+
+app.get("/workout/upper", async (req, res) => {
+  const upWorkout = await getUpperWorkout();
+  res.json(upWorkout);
+});
+
+app.get("/workout/lower", async (req, res) => {
+  const lowerWorkout = await getLowerWorkout();
+  res.json(lowerWorkout);
 });
 
 app.listen(port, () => console.log(`Express app running on port ${port}!`));
