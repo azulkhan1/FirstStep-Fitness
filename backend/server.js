@@ -3,6 +3,7 @@ const app = express();
 const port = 3001;
 const mongoose = require("mongoose");
 const hashPassword = require("./passwordHasher");
+const { getExercisesForBodyPart } = require("./excersiceDBApi");
 
 // app.use(express.json()); // Make sure it comes back as json
 // app.use(express.urlencoded()); // Make sure it comes back as json
@@ -58,6 +59,10 @@ app.get("/getUsers", (req, res) => {
 //       console.log("after ", req.body);
 
 // });
+
+app.get("/", (req, res) => {
+  getExercisesForBodyPart("back");
+});
 
 app.listen(port, () => console.log(`Express app running on port ${port}!`));
 
