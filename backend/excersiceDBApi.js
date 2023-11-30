@@ -4,7 +4,7 @@ async function getExercisesForBodyPart(bodypart) {
   const url =
     "https://exercisedb.p.rapidapi.com/exercises/bodyPart/" +
     bodypart +
-    "?limit=8";
+    "?limit=15";
   const options = {
     method: "GET",
     headers: {
