@@ -25,10 +25,10 @@ const Workout = () => {
         </div>
       </div>
       <ExCard
-        title="Living Room Sofa"
+        title="BARBELL BENCH PRESS"
         description="This sofa is perfect for modern tropical spaces, baroque inspired spaces, earthy toned spaces and for people who love a chic design with a sprinkle of vintage design."
         price="$450"
-        imageUrl="/path-to-your-image.jpg" // Replace with your image path
+        imageUrl="https://v2.exercisedb.io/image/MTKnNBE-SMHATg"
       />
 
       <div className="splits">

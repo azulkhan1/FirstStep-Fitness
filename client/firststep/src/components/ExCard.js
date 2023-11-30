@@ -9,8 +9,8 @@ const ExCard = ({ title, description, price, imageUrl }) => {
       </div>
       <div className="excard-info">
         <h2 className="excard-title">{title}</h2>
-        <p className="excard-description">{description}</p>
-        <div className="excard-price">{price}</div>
+        {/* <p className="excard-description">{description}</p>
+        <div className="excard-price">{price}</div> */}
       </div>
     </div>
   );
