@@ -2,6 +2,9 @@ const express = require('express');
 const app = express();
 const port = 3001;
 const mongoose = require("mongoose");
+const hashPassword = require("./passwordHasher");
+const { getExercisesForBodyPart } = require("./excersiceDBApi");
+
 
 // app.use(express.json()); // Make sure it comes back as json
 // app.use(express.urlencoded()); // Make sure it comes back as json 
@@ -33,6 +36,53 @@ app.get('/getUsers', (req, res) => {
       });
 });
 
+
+// BMI calculation endpoint
+app.post('/bmi', (req, res) => {
+  const { height, weight } = req.body;
+
+  // Validate the input
+  if (!height || !weight) {
+    return res.status(400).json({ error: "Please provide both height and weight" });
+  }
+
+  // Convert height from centimeters to meters
+  const heightInMeters = height / 100;
+
+  // Calculate the BMI
+  const bmi = weight / (heightInMeters * heightInMeters);
+
+  // Decide the fitness pathway based on BMI
+  let pathway = '';
+  if (bmi < 18.5) {
+    pathway = 'Underweight - Eat more calories.';
+  } else if (bmi >= 18.5 && bmi <= 24.9) {
+    pathway = 'Normal weight - Maintain your current diet and exercise.';
+  } else if (bmi >= 25 && bmi <= 29.9) {
+    pathway = 'Overweight - Cut down on calories and start exercising.';
+  } else {
+    pathway = 'Obesity - Consult a doctor for a suitable fitness plan.';
+  }
+
+  // Send the BMI and pathway as a response
+  res.json({ bmi: bmi.toFixed(2), pathway });
+});
+
+
+
+app.get("/", (req, res) => {
+  getExercisesForBodyPart("back");
+});
+
+app.listen(port, () => console.log(`Express app running on port ${port}!`));
+
+
+
+
+
+
+
+
 // const testuser =  {
 //         fullName: "Haidar Almousawi",
 //         age: "21",
@@ -60,7 +110,7 @@ app.get('/getUsers', (req, res) => {
 // });
 
 
-app.listen(port, () => console.log(`Express app running on port ${port}!`));
+
 
 
 
