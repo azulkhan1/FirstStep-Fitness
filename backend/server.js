@@ -6,6 +6,7 @@ const hashPassword = require("./passwordHasher");
 const { getPushWorkout } = require("./ppl/push");
 const { getPullWorkout } = require("./ppl/pull");
 const { getLegWorkout } = require("./ppl/legs");
+const { getFullBodyWorkout } = require("./fullbody/fullBodyWorkout");
 
 // app.use(express.json()); // Make sure it comes back as json
 // app.use(express.urlencoded()); // Make sure it comes back as json
@@ -62,8 +63,6 @@ const { getLegWorkout } = require("./ppl/legs");
 
 // });
 
-//app.get("/", async (req, res) => {});
-
 app.get("/workout/ppl/push", async (req, res) => {
   const pushWorkout = await getPushWorkout();
   res.json(pushWorkout);
@@ -77,6 +76,11 @@ app.get("/workout/ppl/pull", async (req, res) => {
 app.get("/workout/ppl/legs", async (req, res) => {
   const legWorkout = await getLegWorkout();
   res.json(legWorkout);
+});
+
+app.get("/workout/fullbody", async (req, res) => {
+  const fWorkout = await getFullBodyWorkout();
+  res.json(fWorkout);
 });
 
 app.listen(port, () => console.log(`Express app running on port ${port}!`));
