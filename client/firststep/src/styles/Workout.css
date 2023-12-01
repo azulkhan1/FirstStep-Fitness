@@ -34,3 +34,30 @@
 .splitTab {
   font-size: 20px;
 }
+
+.workoutFormHeading {
+  display: flex;
+  justify-content: center;
+  font-size: 42px;
+}
+
+.plan {
+  font-size: 35px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.planB {
+  display: flex;
+  justify-content: center;
+}
+
+.but {
+  margin-right: 10px;
+  height: 35px;
+  width: 70px;
+  background-color: #444952;
+  color: white;
+  border-radius: 12px;
+}
