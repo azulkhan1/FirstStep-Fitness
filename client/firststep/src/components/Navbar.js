@@ -18,6 +18,9 @@ const Navbar = () => {
         <li>
           <Link to="/workout">Workout</Link>
         </li>
+        <li>
+          <Link to="/GetBMI">GetBMI</Link>
+        </li>
       </ul>
     </nav>
   );
