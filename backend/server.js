@@ -9,6 +9,7 @@ const { getLegWorkout } = require("./ppl/legs");
 const { getFullBodyWorkout } = require("./fullbody/fullBodyWorkout");
 const { getUpperWorkout } = require("./UppLower/upper");
 const { getLowerWorkout } = require("./UppLower/lower");
+const { getBMI } = require("./bmiAPI");
 
 // app.use(express.json()); // Make sure it comes back as json
 // app.use(express.urlencoded()); // Make sure it comes back as json
@@ -64,6 +65,11 @@ const { getLowerWorkout } = require("./UppLower/lower");
 //       console.log("after ", req.body);
 
 // });
+
+app.get("/bmi", async (req, res) => {
+  const bmi = await getBMI(150, 60);
+  res.json(bmi);
+})
 
 app.get("/workout/ppl/push", async (req, res) => {
   const pushWorkout = await getPushWorkout();
