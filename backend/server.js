@@ -9,6 +9,9 @@ const { getLegWorkout } = require("./ppl/legs");
 const { getFullBodyWorkout } = require("./fullbody/fullBodyWorkout");
 const { getUpperWorkout } = require("./UppLower/upper");
 const { getLowerWorkout } = require("./UppLower/lower");
+const cors = require("cors");
+
+app.use(cors());
 
 // app.use(express.json()); // Make sure it comes back as json
 // app.use(express.urlencoded()); // Make sure it comes back as json

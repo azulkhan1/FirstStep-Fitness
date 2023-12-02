@@ -61,3 +61,9 @@
   color: white;
   border-radius: 12px;
 }
+
+.excard-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+}
