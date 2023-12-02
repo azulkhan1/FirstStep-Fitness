@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const port = 3001;
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 const hashPassword = require("./passwordHasher");
 const { getPushWorkout } = require("./ppl/push");
 const { getPullWorkout } = require("./ppl/pull");
@@ -10,7 +11,7 @@ const { getFullBodyWorkout } = require("./fullbody/fullBodyWorkout");
 const { getUpperWorkout } = require("./UppLower/upper");
 const { getLowerWorkout } = require("./UppLower/lower");
 
-// app.use(express.json()); // Make sure it comes back as json
+app.use(express.json()); // Make sure it comes back as json
 // app.use(express.urlencoded()); // Make sure it comes back as json
 
 // import UserSchema from './userSchema.js';
