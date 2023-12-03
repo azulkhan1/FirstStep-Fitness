@@ -1,36 +1,82 @@
-import React from "react";
+import React, { useState } from "react";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import "../styles/Workout.css";
 import ExCard from "../components/ExCard";
 
 const Workout = () => {
+  const [data, setData] = useState(null);
+
+  async function getData(apiLink) {
+    const response = await fetch(apiLink);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const newData = await response.json();
+    setData(newData);
+    console.log(data);
+  }
   return (
     <div>
       <div>
         <h1 className="workoutFormHeading">GET YOUR WORKOUT PLAN</h1>
         <h3 className="plan">PUSH PULL LEGS</h3>
         <div className="planB">
-          <button className="but">PUSH</button>
-          <button className="but">PULL</button>
-          <button className="but">LEGS</button>
+          <button
+            className="but"
+            onClick={() => getData("http://localhost:3001/workout/ppl/push")}
+          >
+            PUSH
+          </button>
+          <button
+            className="but"
+            onClick={() => getData("http://localhost:3001/workout/ppl/pull")}
+          >
+            PULL
+          </button>
+          <button
+            className="but"
+            onClick={() => getData("http://localhost:3001/workout/ppl/legs")}
+          >
+            LEGS
+          </button>
         </div>
         <h3 className="plan">UPPER/LOWER</h3>
         <div className="planB">
-          <button className="but">UPPER</button>
-          <button className="but">LOWER</button>
+          <button
+            className="but"
+            onClick={() => getData("http://localhost:3001/workout/upper")}
+          >
+            UPPER
+          </button>
+          <button
+            className="but"
+            onClick={() => getData("http://localhost:3001/workout/lower")}
+          >
+            LOWER
+          </button>
         </div>
         <h3 className="plan">FULL-BODY</h3>
         <div className="planB">
-          <button className="but">FULL-BODY</button>
+          <button
+            className="but"
+            onClick={() => getData("http://localhost:3001/workout/fullbody")}
+          >
+            FULL-BODY
+          </button>
         </div>
       </div>
-      <ExCard
-        title="BARBELL BENCH PRESS"
-        description="This sofa is perfect for modern tropical spaces, baroque inspired spaces, earthy toned spaces and for people who love a chic design with a sprinkle of vintage design."
-        price="$450"
-        imageUrl="https://v2.exercisedb.io/image/MTKnNBE-SMHATg"
-      />
-
+      <div className="excard-grid">
+        {data.map((exercise, index) => {
+          return (
+            <ExCard
+              key={index}
+              id={index}
+              title={exercise.name}
+              imageUrl={exercise.gifUrl}
+            />
+          );
+        })}
+      </div>
       <div className="splits">
         <Tabs align="center">
           <TabList>
