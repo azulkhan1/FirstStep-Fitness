@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Workout from "./pages/Workout";
+import GetBMI from "./pages/GetBMI";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/workout" element={<Workout />} />
+          <Route path="/GetBMI" element={<GetBMI />} />
         </Routes>
       </div>
     </Router>
