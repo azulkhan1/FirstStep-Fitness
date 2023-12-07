@@ -11,6 +11,10 @@ const { getLegWorkout } = require("./ppl/legs");
 const { getFullBodyWorkout } = require("./fullbody/fullBodyWorkout");
 const { getUpperWorkout } = require("./UppLower/upper");
 const { getLowerWorkout } = require("./UppLower/lower");
+const { getBMI } = require("./bmiAPI");
+const cors = require("cors");
+
+app.use(cors());
 
 app.use(express.json()); // Make sure it comes back as json
 // app.use(express.urlencoded()); // Make sure it comes back as json
@@ -153,6 +157,11 @@ app.get("/workout/upper", async (req, res) => {
 app.get("/workout/lower", async (req, res) => {
   const lowerWorkout = await getLowerWorkout();
   res.json(lowerWorkout);
+});
+
+app.get("/bmi", async (req, res) => {
+  const getBmi = await getBMI(160, 70);
+  res.json(getBmi);
 });
 
 app.listen(port, () => console.log(`Express app running on port ${port}!`));

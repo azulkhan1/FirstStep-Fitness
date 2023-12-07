@@ -12,7 +12,7 @@ const Contact = () => {
     
           <div className='right'>
             <h1> Contact Us </h1>
-            <form id="contact-form" method="POST">
+            <form action="https://formsubmit.co/rashbd0909@gmail.com" id="contact-form" method="POST">
               <label htmlFor = "name">Your Name</label>
               <input name="name" placeholder="Enter full name" type ="text"/>
               <label htmlFor = "email">Email </label>
