@@ -4,7 +4,7 @@ import "../styles/Workout.css";
 import ExCard from "../components/ExCard";
 
 const Workout = () => {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState([]);
 
   async function getData(apiLink) {
     const response = await fetch(apiLink);
@@ -66,11 +66,10 @@ const Workout = () => {
         </div>
       </div>
       <div className="excard-grid">
-        {data.map((exercise, index) => {
+      {data.map((exercise, index) => {
           return (
             <ExCard
               key={index}
-              id={index}
               title={exercise.name}
               imageUrl={exercise.gifUrl}
             />
