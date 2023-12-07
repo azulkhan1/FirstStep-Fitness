@@ -2,6 +2,8 @@ const express = require("express");
 const app = express();
 const port = 3001;
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
+const UserModel = require("./userSchema");
 const hashPassword = require("./passwordHasher");
 const { getPushWorkout } = require("./ppl/push");
 const { getPullWorkout } = require("./ppl/pull");
@@ -14,7 +16,7 @@ const cors = require("cors");
 
 app.use(cors());
 
-// app.use(express.json()); // Make sure it comes back as json
+app.use(express.json()); // Make sure it comes back as json
 // app.use(express.urlencoded()); // Make sure it comes back as json
 
 // import UserSchema from './userSchema.js';
@@ -23,6 +25,20 @@ app.use(cors());
 //   "mongodb+srv://firststepfitness:KyOuGp90Gr4GmluW@cluster0.atn6plz.mongodb.net/firststepdb"
 // );
 
+
+
+// Connect to MongoDB
+mongoose.connect(
+  "mongodb+srv://firststepfitness:KyOuGp90Gr4GmluW@cluster0.atn6plz.mongodb.net/firststepdb",
+  { useNewUrlParser: true, useUnifiedTopology: true }
+).then(() => console.log("MongoDB connected"))
+  .catch(err => console.log(err));
+
+
+  app.get('/', (req, res) => {
+    res.send('Welcome to the FirstStep Fitness API!');
+  });
+  
 // const UserSchema = new mongoose.Schema({
 //   fullName: String,
 //   age: String,
@@ -68,6 +84,50 @@ app.use(cors());
 //       console.log("after ", req.body);
 
 // });
+
+
+const cors = require('cors');
+app.use(cors()); // Add this line before your routes to enable CORS
+
+
+// Add the login route
+app.post('/login', async (req, res) => {
+  const { username, password } = req.body;
+
+  try {
+    // Find the user by username
+    const user = await UserModel.findOne({ username });
+
+    // If user exists and passwords match
+    if (user && await bcrypt.compare(password, user.passwordHash)) {
+      // You might want to create a session or a token here
+      res.json({ message: "Login successful!" });
+    } else {
+      res.status(401).json({ message: "Invalid username or password." });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error occurred." });
+  }
+});
+
+app.post('/signup', async (req, res) => {
+  const { username, password, fullName, age } = req.body;
+
+  try {
+      // Hash the password before saving to the database
+      const passwordHash = await hashPassword(password);
+
+      // Create a new user instance and save it to the database
+      const newUser = new UserModel({ username, passwordHash, fullName, age });
+      await newUser.save();
+
+      res.status(201).json({ message: "User created successfully!" });
+  } catch (error) {
+      res.status(500).json({ message: "Error creating user" });
+  }
+});
+
 
 app.get("/workout/ppl/push", async (req, res) => {
   const pushWorkout = await getPushWorkout();
