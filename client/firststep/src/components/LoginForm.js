@@ -10,7 +10,7 @@ const LoginForm = () => {
 
         // Try to send a POST request to the server with the username and password
         try {
-            const response = await fetch('/login', {
+            const response = await fetch('http://localhost:3001/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json', // The content type should be JSON
