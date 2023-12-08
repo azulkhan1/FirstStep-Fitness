@@ -8,7 +8,10 @@ import LoginPage from "./pages/LoginPage";
 import SignupPage from './pages/SignupPage';
 import GetBMI from "./pages/GetBMI";
 
+
+
 function App() {
+  
   return (
     <Router>
       <div>
@@ -21,7 +24,11 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/GetBMI" element={<GetBMI />} />
+      
         </Routes>
+        
+       
+  
       </div>
     </Router>
   );
