@@ -25,20 +25,19 @@ app.use(express.json()); // Make sure it comes back as json
 //   "mongodb+srv://firststepfitness:KyOuGp90Gr4GmluW@cluster0.atn6plz.mongodb.net/firststepdb"
 // );
 
-
-
 // Connect to MongoDB
-mongoose.connect(
-  "mongodb+srv://firststepfitness:KyOuGp90Gr4GmluW@cluster0.atn6plz.mongodb.net/firststepdb",
-  { useNewUrlParser: true, useUnifiedTopology: true }
-).then(() => console.log("MongoDB connected"))
-  .catch(err => console.log(err));
+// mongoose
+//   .connect(
+//     "mongodb+srv://firststepfitness:KyOuGp90Gr4GmluW@cluster0.atn6plz.mongodb.net/firststepdb",
+//     { useNewUrlParser: true, useUnifiedTopology: true }
+//   )
+//   .then(() => console.log("MongoDB connected"))
+//   .catch((err) => console.log(err));
 
+// app.get("/", (req, res) => {
+//   res.send("Welcome to the FirstStep Fitness API!");
+// });
 
-  app.get('/', (req, res) => {
-    res.send('Welcome to the FirstStep Fitness API!');
-  });
-  
 // const UserSchema = new mongoose.Schema({
 //   fullName: String,
 //   age: String,
@@ -85,13 +84,10 @@ mongoose.connect(
 
 // });
 
-
-const cors = require('cors');
 app.use(cors()); // Add this line before your routes to enable CORS
 
-
 // Add the login route
-app.post('/login', async (req, res) => {
+app.post("/login", async (req, res) => {
   const { username, password } = req.body;
 
   try {
@@ -99,7 +95,7 @@ app.post('/login', async (req, res) => {
     const user = await UserModel.findOne({ username });
 
     // If user exists and passwords match
-    if (user && await bcrypt.compare(password, user.passwordHash)) {
+    if (user && (await bcrypt.compare(password, user.passwordHash))) {
       // You might want to create a session or a token here
       res.json({ message: "Login successful!" });
     } else {
@@ -111,23 +107,22 @@ app.post('/login', async (req, res) => {
   }
 });
 
-app.post('/signup', async (req, res) => {
+app.post("/signup", async (req, res) => {
   const { username, password, fullName, age } = req.body;
 
   try {
-      // Hash the password before saving to the database
-      const passwordHash = await hashPassword(password);
+    // Hash the password before saving to the database
+    const passwordHash = await hashPassword(password);
 
-      // Create a new user instance and save it to the database
-      const newUser = new UserModel({ username, passwordHash, fullName, age });
-      await newUser.save();
+    // Create a new user instance and save it to the database
+    const newUser = new UserModel({ username, passwordHash, fullName, age });
+    await newUser.save();
 
-      res.status(201).json({ message: "User created successfully!" });
+    res.status(201).json({ message: "User created successfully!" });
   } catch (error) {
-      res.status(500).json({ message: "Error creating user" });
+    res.status(500).json({ message: "Error creating user" });
   }
 });
-
 
 app.get("/workout/ppl/push", async (req, res) => {
   const pushWorkout = await getPushWorkout();
@@ -159,9 +154,10 @@ app.get("/workout/lower", async (req, res) => {
   res.json(lowerWorkout);
 });
 
-app.get("/bmi", async (req, res) => {
-  const getBmi = await getBMI(160, 70);
-  res.json(getBmi);
+app.post("/bmi", async (req, res) => {
+  const { height, weight } = req.body;
+  const getBmi = await getBMI(weight, height);
+  res.json({ getBmi });
 });
 
 app.listen(port, () => console.log(`Express app running on port ${port}!`));
