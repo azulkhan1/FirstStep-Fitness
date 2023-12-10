@@ -27,7 +27,7 @@ function GetBMI() {
     <div>
       <form onSubmit={handleSubmit}>
         <label>
-          Height (cm):
+          Height (in):
           <input
             type="number"
             value={height}
