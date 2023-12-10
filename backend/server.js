@@ -26,13 +26,13 @@ app.use(express.json()); // Make sure it comes back as json
 // );
 
 // Connect to MongoDB
-// mongoose
-//   .connect(
-//     "mongodb+srv://firststepfitness:KyOuGp90Gr4GmluW@cluster0.atn6plz.mongodb.net/firststepdb",
-//     { useNewUrlParser: true, useUnifiedTopology: true }
-//   )
-//   .then(() => console.log("MongoDB connected"))
-//   .catch((err) => console.log(err));
+mongoose
+  .connect(
+    "mongodb+srv://firststepfitness:KyOuGp90Gr4GmluW@cluster0.atn6plz.mongodb.net/firststepdb",
+    { useNewUrlParser: true, useUnifiedTopology: true }
+  )
+  .then(() => console.log("MongoDB connected"))
+  .catch((err) => console.log(err));
 
 // app.get("/", (req, res) => {
 //   res.send("Welcome to the FirstStep Fitness API!");
